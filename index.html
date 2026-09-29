@@ -3,125 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Visita de supervisión</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="theme-color" content="#12345a" />
+  <title>Menú de proyectos · PSS</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: clamp(24px, 5vw, 64px) 20px;
+      display: grid;
+      place-items: center;
+      color: #18314e;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(ellipse at top left, #fff 0, transparent 42%), linear-gradient(145deg, #eaf1f8, #d9e5f1);
+    }
+    main { width: min(1080px, 100%); }
+    .menu-header {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 4vw, 36px);
+      margin-bottom: 32px;
+      padding: clamp(22px, 4vw, 38px);
+      border: 1px solid rgb(255 255 255 / 75%);
+      border-radius: 24px;
+      background: linear-gradient(120deg, #12345a, #1c5484);
+      box-shadow: 0 18px 46px rgb(18 52 90 / 18%);
+      color: #fff;
+    }
+    .brand-mark {
+      display: grid;
+      flex: 0 0 clamp(90px, 17vw, 150px);
+      aspect-ratio: 1;
+      place-items: center;
+      padding: 12px;
+      border: 1px solid rgb(255 255 255 / 65%);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgb(0 0 0 / 12%);
+    }
+    .brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .eyebrow { margin: 0 0 9px; color: #b9d9f2; font-size: .78rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.08; }
+    .intro { max-width: 580px; margin: 12px 0 0; color: #e1edf7; font-size: clamp(.98rem, 2vw, 1.1rem); line-height: 1.55; }
+    .projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .project {
+      position: relative;
+      display: flex;
+      min-height: 250px;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 26px;
+      border: 1px solid #d7e2ed;
+      border-radius: 18px;
+      background: rgb(255 255 255 / 96%);
+      box-shadow: 0 10px 28px rgb(18 52 90 / 8%);
+      color: inherit;
+      text-decoration: none;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .project::before { position: absolute; inset: 0 0 auto; height: 5px; background: linear-gradient(90deg, #2679b9, #70b5e3); content: ""; }
+    .project:hover, .project:focus-visible { transform: translateY(-5px); border-color: #9fc4e1; box-shadow: 0 18px 36px rgb(18 52 90 / 15%); }
+    .project:focus-visible { outline: 3px solid #3288c7; outline-offset: 4px; }
+    .number { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 22px; border-radius: 13px; background: #e9f3fb; color: #1768aa; font-size: .9rem; font-weight: 800; letter-spacing: .06em; }
+    h2 { margin: 0 0 11px; color: #12345a; font-size: 1.25rem; line-height: 1.3; }
+    .description { margin: 0; color: #5d6f84; line-height: 1.6; }
+    .open { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 24px; color: #1768aa; font-weight: 700; }
+    .arrow { font-size: 1.25rem; transition: transform 180ms ease; }
+    .project:hover .arrow, .project:focus-visible .arrow { transform: translateX(4px); }
+    footer { margin-top: 26px; color: #63788e; font-size: .88rem; text-align: center; }
+    @media (max-width: 760px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 520px) {
+      body { padding: 20px 14px; }
+      .menu-header { align-items: flex-start; flex-direction: column; border-radius: 20px; }
+      .brand-mark { flex-basis: auto; width: 88px; height: 88px; }
+      .projects { grid-template-columns: 1fr; gap: 14px; }
+      .project { min-height: 215px; padding: 23px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
 </head>
 <body>
-  <main class="page">
-    <nav class="menu-navigation" aria-label="Navegación principal"><a href="../index.html">← Volver al menú</a></nav>
-    <header class="header">
-      <div class="brand"><img src="logo.png" alt="PSS Professional Security Services" /></div>
-      <div class="title"><h1>VISITA DE SUPERVISIÓN</h1><p>DOCUMENTO CONFIDENCIAL · USO INTERNO</p></div>
-      <label class="date">Fecha<input type="date" name="fecha" /></label>
+  <main>
+    <header class="menu-header">
+      <div class="brand-mark"><img src="Proyecto%201/logo.png" alt="Logotipo de Professional Security Services" /></div>
+      <div>
+        <p class="eyebrow">Professional Security Services · PSS</p>
+        <h1>Menú de proyectos</h1>
+        <p class="intro">Seleccione el formulario que desea abrir para consultar, completar o imprimir un informe.</p>
+      </div>
     </header>
 
-    <form id="supervisionForm">
-      <div class="top-fields">
-        <label>Hora de ingreso<input type="time" name="horaIngreso" /></label>
-        <label>Hora de salida<input type="time" name="horaSalida" /></label>
-      </div>
-      <label class="print-inline-field">SUPERVISOR<select name="supervisor"><option>Seleccione un supervisor</option>
-      <option>Jesús Cruz Soto</option>
-      <option>Arlyng Urbina</option>
-      <option>Luis Jaen barboza</option>
-      <option>Carlos Abarca Cespedes</option>
-      <option>Giusseppe Meneses Soto</option>
-      <option>Francisco Cisneros Sanchez</option>
-      <option>Jose Herrera Lopez</option>
-      <option>Kevin Alvarado Guevara</option>
-      
-      </select></label>
-      <label class="print-inline-field">Instalaciones<select name="instalacion"><option>Seleccione una opción</option>
-        <option>Central</option>
-        <option>Condominio Condal</option>
-        <option>Casa Yiya</option>
-        <option>Casa San Pedro</option>
-        <option>Casa Tirol</option>
-        <option>Casa Castillo</option>
-        <option>Casa Puntarenas</option>
-        <option>Villas del Rio</option>
-        <option>Barrio Tena</option>
-        <option>Bodegas Condal Rohrmoser TLA</option>
-        <option>Parque Condal Tibas</option>
-        <option>Oficentro Condal Escazu</option>
-        <option>Oficentro Condal San Pedro</option>
-        <option>Bodegas Barrio Mexico</option>
-        <option>Parque Industrial Condal Orotina</option>
-        <option>Parque Industrial Condal Ciruelas</option>
-        <option>Forum 2 Edificios JKL</option>
-        <option>Recidencia Casa Tena</option>
-        <option>Edificio Anexo Galerias</option>
-        <option>Condominio Mallorca</option>
-        <option>Parque Condal Colima</option>
-        <option>Oficentro Rohrmoser</option>
-        <option>Espacio Quattro</option>
-        <option>Bodegas Pavas Centro</option>
-        <option>Oficentro Sabana</option>      </select></label>
-
-      <section id="installationPoints" class="installation-points" aria-labelledby="pointsHeading">
-        <h2 id="pointsHeading">Puesto Visitado</h2>
-        <div id="pointChecks" class="point-checks">
-          <label><input type="checkbox" class="point-check" value="Caseta Principal" /> Caseta Principal</label>
-          <label><input type="checkbox" class="point-check" value="Caseta Secundaria" /> Caseta Secundaria</label>
-          <label><input type="checkbox" class="point-check" value="Recorrido" /> Recorrido</label>
-        </div>
-        <div id="customPoints"></div>
-        <button type="button" class="add add-point" id="addPoint">Agregar otro puesto</button>
-        <p class="points-help">Seleccione uno o más puestos para habilitar su informe individual.</p>
-      </section>
-
-      <section id="pointReports" class="point-reports" aria-labelledby="reportsHeading" hidden>
-        <h2 id="reportsHeading">Informes por punto</h2>
-        <div id="pointReportTabs" class="point-report-tabs" role="tablist" aria-label="Informes por puesto"></div>
-        <div id="pointReportsList"></div>
-      </section>
-
-      <label class="check"><input type="checkbox" id="visitaProveedor" checked /> Visita de proveedor</label>
-      <label id="providerCompany">Nombre de la empresa (proveedor)<input type="text" name="proveedor" /></label>
-      <label id="providerWork">¿Qué trabajo viene a realizar?<textarea name="trabajo" rows="3"></textarea></label>
-
-      <section id="personnelBlock">
-        <h2>Personal que laboró</h2>
-        <div id="personnelList">
-          <div class="person-row">
-            <div class="person-fields"><label>Nombre y apellidos<input type="text" placeholder="Nombre y apellidos" /></label><label>Número de cédula<input type="text" placeholder="Número de cédula" /></label></div>
-            <button type="button" class="remove">Eliminar</button>
-          </div>
-        </div>
-        <button type="button" class="add" id="addPerson">Agregar personal</button>
-      </section>
-
-      <label class="section-label"><span class="field-heading">Detalles</span><textarea name="detalles" rows="4" placeholder="Escriba los detalles del trabajo realizado..."></textarea></label>
-
-      <section id="photosSection">
-        <h2>Imágenes / Fotografías</h2>
-        <div class="photo-tools"><input id="photos" type="file" accept="image/*" multiple /><button type="button" class="primary" id="cameraButton">Tomar fotografía</button></div>
-        <div id="photoPreview" class="preview-grid"></div>
-        <input id="cameraInput" type="file" accept="image/*" capture="environment" hidden />
-      </section>
-
-      <label class="check" id="includeAdminLabel"><input type="checkbox" id="includeAdmin" checked /> Incluir informe a Administración adicional</label>
-      <label id="adminBlock"><span class="field-heading">Informe a Administración adicional</span><textarea name="administracion" rows="3"></textarea></label>
-      <button type="button" class="admin-print-button" id="adminPrintButton" hidden>Imprimir solo informe a Administración</button>
-
-      <section class="signatures">
-        <h2>Firmas</h2>
-        <div class="signature-grid">
-          <div class="signature-card" id="officerCard"><h3>Oficial en Turno</h3><div class="sign-fields"><label>Nombre y apellidos<input type="text" /></label><label>Cédula<input type="text" /></label></div><label class="signature-mode"><input type="checkbox" class="disable-digital-signature" /> Firma física (deshabilitar firma digital)</label><canvas class="signature-canvas" aria-label="Firma del oficial"></canvas><div class="physical-signature-line">Firma física</div><b>Subir firma JPG o PNG</b><input class="signature-upload" type="file" accept="image/png,image/jpeg" /><button type="button" class="clear-sign">Limpiar firma</button></div>
-          <div class="signature-card" id="ownerCard"><h3>Encargado / Dueño</h3><div class="sign-fields"><label>Nombre y apellidos<input type="text" /></label><label>Cédula<input type="text" /></label></div><label class="signature-mode"><input type="checkbox" class="disable-digital-signature" /> Firma física (deshabilitar firma digital)</label><canvas class="signature-canvas" aria-label="Firma del encargado"></canvas><div class="physical-signature-line">Firma física</div><b>Subir firma JPG o PNG</b><input class="signature-upload" type="file" accept="image/png,image/jpeg" /><button type="button" class="clear-sign">Limpiar firma</button></div>
-        </div>
-      </section>
-      <button class="submit" type="submit">Vista previa de impresión / Imprimir</button>
-    </form>
-    <footer><div><img src="logo.png" alt="PSS Professional Security Services" /></div><div>Professional Security Services (PSS)<br /><span>Cédula Jurídica 3-101-595345<br />Empresa Autorizada por la DSSP según Resolución 9310 RAS-2024</span></div><div><img src="logo.png" alt="PSS Professional Security Services" /></div></footer>
+    <nav class="projects" aria-label="Proyectos disponibles">
+      <a class="project" href="Proyecto%201/index.html">
+        <span class="number">01</span>
+        <h2>Visita de supervisión</h2>
+        <p class="description">Formulario de visita, revisión de puestos, fotografías e informes.</p>
+        <span class="open">Abrir proyecto <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="project" href="Proyecto%202/index.html">
+        <span class="number">02</span>
+        <h2>Informe laboral</h2>
+        <p class="description">Registro de incidentes laborales, evidencias e información del personal.</p>
+        <span class="open">Abrir proyecto <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="project" href="Proyecto%203/index.html">
+        <span class="number">03</span>
+        <h2>Informe de revisión CCTV</h2>
+        <p class="description">Reporte de incidentes, cámaras involucradas, fotografías y firmas.</p>
+        <span class="open">Abrir proyecto <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    </nav>
+    <footer>Professional Security Services (PSS) · Uso interno</footer>
   </main>
-  <div class="print-page-branding" aria-hidden="true">
-    <img class="print-logo print-logo-left" src="logo.png" alt="" />
-    <img class="print-logo print-logo-right" src="logo.png" alt="" />
-    <div class="print-watermark">Professional Security Services (PSS)<br /><span>Cédula Jurídica 3-101-595345<br />Empresa Autorizada por la DSSP según Resolución 9310 RAS-2024</span></div>
-    <img class="print-logo print-logo-bottom-left" src="logo.png" alt="" />
-    <img class="print-logo print-logo-bottom-right" src="logo.png" alt="" />
-  </div>
-  <script src="script.js"></script>
 </body>
 </html>
