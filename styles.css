@@ -1,6 +1,652 @@
-body{
-  padding: 25px;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+:root {
+  --navy: #172b4d;
+  --navy-dark: #10213d;
+  --blue: #2f6fed;
+  --gold: #c69a4b;
+  --ink: #24344d;
+  --muted: #718096;
+  --line: #e2e8f0;
+  --surface: #ffffff;
+  --background: #edf2f7;
+  font-family: 'DM Sans', Arial, sans-serif;
+  color: var(--ink);
+  font-size: 13px;
 }
-.title {
-	color: #5C6AC4;
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #e7edf5 0%, #f7f9fc 55%, #e8eef7 100%);
+}
+
+.menu-navigation { margin: 16px 0; }
+.menu-navigation a { display: inline-block; padding: 9px 14px; color: #fff; background: var(--navy); border-radius: 8px; font-size: 12px; font-weight: 700; text-decoration: none; }
+.menu-navigation a:hover, .menu-navigation a:focus-visible { background: var(--blue); }
+
+.page {
+  width: min(100% - 32px, 920px);
+  margin: 28px auto;
+  padding: 0 34px 28px;
+  background: var(--surface);
+  border: 1px solid rgba(23, 43, 77, .08);
+  border-radius: 18px;
+  box-shadow: 0 18px 55px rgba(23, 43, 77, .12);
+  overflow: hidden;
+}
+
+.header {
+  min-height: 126px;
+  margin: 0 -34px 28px;
+  padding: 25px 34px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 20px;
+  color: white;
+  background: linear-gradient(120deg, var(--navy-dark), var(--navy));
+  border-bottom: 4px solid var(--gold);
+}
+
+.brand { display: flex; align-items: center; }
+.brand img { display: block; width: min(100%, 190px); height: auto; max-height: 78px; object-fit: contain; }
+.brand-mark { color: var(--gold); font-size: 37px; line-height: 1; margin-right: 5px; }
+.brand small { display: block; color: #b8c5d9; font-size: 8px; font-weight: 400; letter-spacing: 0; }
+.title { text-align: center; }
+.title h1 { margin: 0; color: #fff; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(20px, 3vw, 29px); letter-spacing: 1px; }
+.title p { margin: 7px 0 0; color: #d9b66d; font-size: 10px; font-weight: 700; letter-spacing: 1.4px; }
+.date { color: #dce5f2; font-size: 11px; font-weight: 600; }
+
+label { display: block; margin: 14px 0; color: var(--navy); font-weight: 700; }
+input, select, textarea {
+  width: 100%;
+  display: block;
+  min-height: 40px;
+  margin-top: 7px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  font: 12px 'DM Sans', Arial, sans-serif;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+input:focus, select:focus, textarea:focus, .rich-editor:focus { background: #fff; border-color: #81a7ef; box-shadow: 0 0 0 3px rgba(47, 111, 237, .12); }
+textarea { min-height: 88px; resize: vertical; }
+
+.rich-toolbar {
+  display: flex;
+  gap: 4px;
+  margin-top: 7px;
+  padding: 4px;
+  background: #f1f5fa;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+}
+.rich-toolbar + .rich-editor { margin-top: 0; }
+.rich-toolbar button {
+  min-width: 28px;
+  padding: 4px 8px;
+  color: var(--navy);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+}
+.rich-toolbar .dictate-button {
+  margin-left: auto;
+  color: #fff;
+  background: var(--blue);
+}
+.rich-toolbar .dictate-button.is-listening {
+  background: #d9363e;
+}
+.rich-toolbar .dictate-button:disabled {
+  color: var(--muted);
+  background: #edf2f7;
+  cursor: not-allowed;
+}
+.rich-editor {
+  min-height: 40px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: #fbfcfe;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  font: 12px 'DM Sans', Arial, sans-serif;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.rich-editor-area { min-height: 88px; }
+.rich-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #9aa8ba;
+  pointer-events: none;
+}
+.person-fields .rich-toolbar { margin-top: 7px; }
+
+
+.top-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.installation-points { margin-top: 18px; padding: 14px 16px; background: #f8fafd; border: 1px solid var(--line); border-top: 2px solid var(--gold); border-radius: 9px; }
+.installation-points h2 { margin-bottom: 12px; }
+.point-checks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.custom-point-row { display: flex; align-items: end; gap: 10px; margin-top: 10px; }
+.custom-point-row label { flex: 1; display: flex; align-items: center; gap: 7px; margin: 0; color: var(--ink); font-size: 11px; }
+.custom-point-row label input.point-check { flex: 0 0 17px; }
+.custom-point-name { flex: 1; min-height: 32px; margin-top: 0; background: #fff; }
+.add-point { margin-top: 12px; }
+.remove-point { margin-top: 0; }
+.point-checks label { display: flex; align-items: center; gap: 7px; margin: 0; color: var(--ink); font-size: 11px; }
+.point-check { width: 17px; min-height: 17px; margin: 0; padding: 0; accent-color: var(--blue); }
+.other-point-field { margin: 12px 0 0; color: var(--muted); font-size: 10px; }
+.other-point-field input { min-height: 32px; margin-top: 4px; background: #fff; }
+.points-help { margin: 10px 0 0; color: var(--muted); font-size: 10px; }
+.point-reports { margin-top: 18px; }
+.point-report-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.point-report-tab { padding: 9px 13px; color: var(--navy); background: #eef3fa; border: 1px solid #d4deed; border-radius: 7px 7px 0 0; }
+.point-report-tab.is-active { color: #fff; background: var(--navy); border-color: var(--navy); }
+.point-report { display: none; margin: 0 0 14px; padding: 14px; background: #f8fafd; border: 1px solid var(--line); border-radius: 10px; }
+.point-report.is-active { display: block; }
+.point-report.is-disabled { display: none; }
+.point-report h3 { margin: 0 0 10px; color: var(--navy); font-family: 'Playfair Display', Georgia, serif; font-size: 16px; }
+  .point-report textarea { min-height: 90px; }
+  .point-report .point-inspection-section { margin-top: 14px; padding-top: 10px; }
+  .point-report .point-inspection-section h2 { font-size: 17px; }
+  .point-report .report-signature { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.point-report .signature-canvas { height: 105px; }
+.inspection-section { margin-top: 18px; }
+.inspection-list { display: grid; gap: 8px; }
+.inspection-item { padding: 10px 13px; background: #f8fafd; border: 1px solid var(--line); border-radius: 9px; }
+.inspection-choice { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 18px; }
+.inspection-name { color: var(--navy); font-weight: 700; }
+.inspection-choice label { display: flex; align-items: center; gap: 5px; margin: 0; color: var(--ink); font-size: 11px; }
+.inspection-check { width: 16px; min-height: 16px; margin: 0; padding: 0; accent-color: var(--blue); }
+.specify-field { margin: 8px 0 0; color: var(--muted); font-size: 10px; }
+.specify-field input { min-height: 32px; margin-top: 4px; background: #fff; }
+.check { display: flex; align-items: center; gap: 8px; margin: 15px 0; color: var(--ink); font-size: 12px; }
+.check input { width: 17px; min-height: 17px; margin: 0; padding: 0; accent-color: var(--blue); }
+
+section { margin-top: 28px; padding-top: 14px; border-top: 2px solid var(--gold); }
+h2 { display: flex; align-items: center; gap: 11px; margin: 0 0 16px; color: var(--navy); font-family: 'Playfair Display', Georgia, serif; font-size: 20px; }
+h2::before { content: ''; width: 5px; height: 24px; background: var(--gold); border-radius: 4px; }
+
+.person-row { margin-bottom: 10px; padding: 15px; background: #f8fafd; border: 1px solid var(--line); border-radius: 11px; }
+.person-fields, .sign-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.person-fields label, .sign-fields label { margin: 0; font-size: 11px; }
+
+button { border: 0; border-radius: 8px; font: 700 11px 'DM Sans', Arial, sans-serif; cursor: pointer; transition: transform .15s, box-shadow .15s, background .15s; }
+button:hover { transform: translateY(-1px); box-shadow: 0 5px 12px rgba(23, 43, 77, .16); }
+.remove, .add, .primary, .clear-sign { padding: 10px 14px; color: #fff; }
+.remove { margin-top: 12px; background: #e05260; }
+.add { background: var(--navy); }
+.primary, .submit { background: linear-gradient(135deg, var(--blue), #234db1); color: #fff; }
+
+.section-label {
+  margin-top: 28px;
+  padding: 16px 18px 18px;
+  color: var(--navy-dark);
+  background: #f4f7fc;
+  border: 1px solid #cbd8eb;
+  border-left: 5px solid var(--gold);
+  border-radius: 10px;
+  font-size: 14px;
+  letter-spacing: .2px;
+}
+
+.section-label textarea {
+  min-height: 125px;
+  margin-top: 9px;
+  padding: 13px 14px;
+  color: #172b4d;
+  background: #fff;
+  border: 1px solid #b9c9df;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.photo-tools { display: flex; align-items: center; gap: 10px; }
+.photo-tools input { flex: 1; margin-top: 0; }
+.photo-tools .primary { white-space: nowrap; }
+.preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(105px, 1fr)); gap: 12px; margin-top: 14px; }
+.preview-grid img { width: 100%; height: 82px; object-fit: cover; border: 1px solid var(--line); border-radius: 9px; box-shadow: 0 3px 8px rgba(23, 43, 77, .08); }
+
+#adminBlock { padding: 14px 16px; background: #fffaf0; border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; }
+.field-heading { display: block; }
+.is-hidden, [hidden] { display: none !important; }
+.signature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.signature-card { padding: 18px; text-align: center; background: #f8fafd; border: 1px solid var(--line); border-radius: 12px; }
+.signature-card h3 { margin: 0 0 14px; color: var(--navy); font-size: 14px; }
+.signature-canvas { display: block; width: 100%; height: 125px; margin: 12px 0; background: #fff; border: 1px dashed #aebbd0; border-radius: 8px; cursor: crosshair; touch-action: none; }
+.signature-mode { display: flex; align-items: center; justify-content: center; gap: 7px; margin: 0 0 8px; color: var(--ink); font-size: 10px; }
+.signature-mode input { width: 16px; min-height: 16px; margin: 0; padding: 0; accent-color: var(--blue); }
+.physical-signature-line { display: none; height: 125px; margin: 12px 0; padding-top: 92px; color: var(--muted); border-bottom: 1px solid var(--ink); font-size: 10px; }
+.signature-card.digital-disabled .signature-canvas,
+.signature-card.digital-disabled b,
+.signature-card.digital-disabled .signature-upload,
+.signature-card.digital-disabled .clear-sign { display: none; }
+.signature-card.digital-disabled .physical-signature-line { display: block; }
+.signature-card b { display: block; color: var(--muted); font-size: 10px; }
+.signature-upload { margin-top: 6px; font-size: 10px; }
+.clear-sign { margin-top: 8px; background: #7b8798; }
+
+.submit { display: block; margin: 34px auto 0; padding: 14px 24px; border-radius: 9px; font-size: 12px; }
+.admin-print-button { display: block; margin: 12px auto 0; padding: 11px 16px; color: var(--navy); background: #fffaf0; border: 1px solid var(--gold); }
+footer { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: end; margin: 42px -10px 0; padding-top: 20px; color: #9aa8ba; border-top: 1px solid var(--line); text-align: center; font-size: 20px; font-weight: 700; }
+footer img { display: block; width: 125px; max-height: 58px; object-fit: contain; }
+footer div:first-child { text-align: left; } footer div:last-child { text-align: right; }
+footer div:last-child img { margin-left: auto; }
+footer span { color: #9aa8ba; font-size: 8px; font-weight: 400; line-height: 1.7; }
+
+@media (max-width: 650px) {
+  .page { width: min(100% - 18px, 920px); margin: 9px auto; padding: 0 18px 20px; border-radius: 12px; }
+  .header { margin: 0 -18px 22px; padding: 20px 18px; grid-template-columns: 1fr 1.7fr; min-height: 145px; }
+  .brand img { width: 145px; max-height: 62px; }
+  .date { grid-column: 1 / -1; } .title h1 { font-size: 18px; }
+  .title p { font-size: 8px; }
+  .top-fields, .signature-grid, .person-fields, .sign-fields, .point-checks, .point-report .report-signature { grid-template-columns: 1fr; gap: 4px; }
+  .photo-tools { align-items: stretch; flex-direction: column; }
+  .photo-tools input { margin-top: 0; } .photo-tools button { width: 100%; }
+}
+
+@media print {
+  @page { margin: 12mm; }
+  html, body { width: 100%; min-height: 0; overflow: visible !important; }
+  body { background: #fff; }
+  .page { width: 100%; max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; box-shadow: none; overflow: visible; zoom: .9; }
+  /* Elementos fijos: el navegador los repite en cada página impresa. */
+  .print-page-branding {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-logo {
+    position: fixed;
+    top: 4mm;
+    z-index: 11;
+    display: block;
+    width: 28mm;
+    height: 14mm;
+    max-height: 14mm;
+    object-fit: contain;
+    opacity: .9;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-logo-left { left: 4mm; }
+  .print-logo-right { right: 4mm; }
+  .print-logo-bottom-left {
+    left: 4mm;
+    top: auto;
+    bottom: 4mm;
+  }
+  .print-logo-bottom-right {
+    right: 4mm;
+    top: auto;
+    bottom: 4mm;
+  }
+  .print-page-branding .print-logo-bottom-left,
+  .print-page-branding .print-logo-bottom-right {
+    display: block !important;
+    visibility: visible !important;
+  }
+  .print-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 170mm;
+    transform: translate(-50%, -50%) rotate(-32deg);
+    color: rgba(23, 43, 77, .12);
+    font-family: Georgia, serif;
+    font-size: 24pt;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    text-align: center;
+    white-space: normal;
+  }
+  .print-watermark span {
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    letter-spacing: .5px;
+  }
+  form, footer { position: relative; z-index: 1; }
+  .brand img, footer img { display: none !important; }
+  .admin-only-print #installationPoints,
+  .admin-only-print #pointReports,
+  .admin-only-print #includeAdminLabel,
+  .admin-only-print .admin-print-button { display: none !important; }
+  .admin-only-print #adminBlock { break-before: auto; page-break-before: auto; }
+  .header { min-height: 92px; margin: 0 0 12px; padding: 16px 24px; border-radius: 0; }
+  form { margin: 0; }
+
+  /* Los informes permanecen debajo de “Puesto Visitado” en la impresión. */
+  #pointReports {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  label { margin: 7px 0; }
+  .rich-toolbar { display: none !important; }
+  .rich-editor { min-height: 26px; margin-top: 0; padding: 4px 7px; border: 0; border-radius: 0; background: #fff; }
+  .rich-editor-area { min-height: 0; }
+
+
+  /* Solo en impresión, estos dos campos comparten la misma fila. */
+  .print-inline-field {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(50% - 8px);
+  }
+
+  .print-inline-field + .print-inline-field {
+    margin-left: 12px;
+    padding-left: 12px;
+    border-left: 2px solid var(--gold);
+  }
+  input, select { min-height: 26px; margin-top: 3px; padding: 4px 7px; }
+  input.print-control-hidden { display: none !important; }
+  .print-control-value { display: block; min-height: 26px; padding: 4px 7px; color: var(--ink); }
+  textarea { margin-top: 3px; }
+  section { margin-top: 10px; padding-top: 8px; border-top-width: 1px; }
+  h2 { margin-bottom: 8px; font-size: 16px; }
+  h2::before { height: 18px; }
+  .person-row { margin-bottom: 6px; padding: 8px; }
+  .signature-card { padding: 10px; }
+  .signature-card h3 { margin-bottom: 7px; }
+  .signature-canvas { height: 85px; margin: 7px 0; }
+  .preview-grid { gap: 6px; margin-top: 7px; }
+  .preview-grid img { height: 65px; }
+  #adminBlock { padding: 8px 10px; }
+  footer { margin-top: 16px; padding-top: 10px; }
+  footer img { width: 92px; max-height: 42px; }
+
+  /* Controles de edición que no deben aparecer en el documento impreso. */
+  .menu-navigation, .submit, .admin-print-button, .remove, .add, .primary, .clear-sign,
+  .photo-tools, .signature-upload, .signature-card b, .check,
+  input[type="file"], input[type="checkbox"] { display: none !important; }
+  .signature-mode { display: none !important; }
+
+  /* La verificación sí forma parte del documento impreso. */
+  .installation-points, .points-help, .point-report-tabs { display: none !important; }
+  .point-reports { margin-top: 10px; }
+  .point-report { padding: 8px; margin-bottom: 8px; break-inside: avoid; page-break-inside: avoid; }
+  .point-report.is-active { display: block; }
+  .point-report:not(.is-active) { display: none !important; }
+  .point-report.is-disabled { display: none !important; }
+
+  /* En impresión, cada puesto seleccionado comienza en una página nueva. */
+  .point-reports.print-all-reports .point-report.print-report-page {
+    display: block !important;
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .point-reports.print-all-reports .point-report.print-report-page:first-of-type {
+    break-before: auto;
+    page-break-before: auto;
+  }
+  .point-report h3 { margin-bottom: 5px; font-size: 14px; }
+  .point-report textarea { min-height: 0; }
+  .point-report .signature-canvas { height: 75px; }
+
+  .inspection-section {
+    margin-top: 10px;
+    padding-top: 8px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .inspection-list { gap: 5px; }
+  .inspection-item {
+    padding: 5px 8px;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .inspection-choice { grid-template-columns: 1fr 56px 56px; gap: 6px; }
+  .inspection-choice label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 17px;
+    font-size: 10px;
+  }
+
+  /* Cuadros de verificación formales para el documento impreso. */
+  .inspection-choice label::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    background: #fff;
+    border: 1px solid #8492a6;
+    border-radius: 3px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .inspection-choice label:has(input:checked)::before {
+    background: #fff;
+    border-color: #111;
+  }
+
+  .inspection-choice label:has(input:checked)::after {
+    position: absolute;
+    left: 0;
+    top: -3px;
+    width: 14px;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 17px;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .inspection-choice label:has(input.yes-check:checked)::after {
+    content: '✓';
+    color: #238b57;
+  }
+
+  .inspection-choice label:has(input.no-check:checked)::after {
+    content: 'X';
+    color: #d9363e;
+    font-size: 14px;
+    font-weight: 700;
+    top: 0;
+    line-height: 14px;
+  }
+
+  .inspection-check {
+    position: absolute;
+    width: 1px !important;
+    height: 1px !important;
+    min-height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .specify-field { margin: 4px 0 0; font-size: 9px; }
+  .specify-field input {
+    min-height: 20px;
+    margin-top: 2px;
+    padding: 2px 4px;
+    border-bottom: 1px solid #9aa8ba;
+    border-radius: 0;
+    font-size: 10px;
+  }
+  .signature-card.digital-disabled .physical-signature-line {
+    display: block;
+    font-size: 0;
+  }
+
+  /* Conserva el texto seleccionado, pero elimina la apariencia de selector. */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: #fff;
+    border: 0;
+    padding: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden !important;
+    white-space: normal;
+  }
+
+  input, select, textarea {
+    background: #fff;
+    overflow: visible !important;
+    height: auto;
+    max-height: none;
+  }
+
+  /* Las áreas de texto se expanden y nunca muestran barras de desplazamiento. */
+  textarea {
+    display: block;
+    min-height: 0;
+    height: auto;
+    max-height: none;
+    resize: none;
+    overflow: hidden !important;
+    scrollbar-width: none !important;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    border: 0;
+    padding: 0;
+    line-height: 1.45;
+  }
+
+  textarea::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  textarea.print-hidden {
+    display: none !important;
+  }
+
+  /* El textarea se reemplaza por .print-textarea-value; su editor visual
+     también debe ocultarse para evitar que el contenido salga duplicado. */
+  textarea.print-hidden ~ .rich-toolbar,
+  textarea.print-hidden ~ .rich-editor {
+    display: none !important;
+  }
+
+  label.print-empty { display: none !important; }
+
+  .print-textarea-value {
+    display: block !important;
+    min-height: 0;
+    padding: 0;
+    color: var(--ink);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.45;
+  }
+
+  /* Evita barras internas en cualquier control que conserve contenido visible. */
+  form, label, input, select, textarea, section, .signature-card {
+    overflow: visible !important;
+  }
+
+  /* Los campos extensos deben poder dividirse entre páginas. Si se evita
+     el corte de toda la etiqueta, el navegador puede dejar una página casi
+     vacía antes de un informe largo. */
+  label {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  /* Mantiene juntos únicamente los bloques pequeños y repetibles. */
+  .person-row, .signature-card, footer,
+  .top-fields, .person-fields, .sign-fields {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  #photosSection {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .section-label, #providerWork, #adminBlock {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .section-label {
+    margin-top: 16px;
+    padding: 9px 0 0;
+    color: var(--navy);
+    background: transparent;
+    border: 0;
+    border-top: 2px solid var(--gold);
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .section-label .field-heading,
+  #adminBlock .field-heading {
+    margin-bottom: 4px;
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .section-label textarea,
+  #adminBlock textarea {
+    margin-top: 0;
+    padding: 0;
+    border: 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  section { break-inside: auto; page-break-inside: auto; }
+
+  /* Evita dejar el título de Firmas solo al final de una página. */
+  .signatures {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-before: auto;
+    page-break-before: auto;
+    margin-top: 8px;
+    padding-top: 6px;
+  }
+
+  .signatures h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+    margin-bottom: 6px;
+  }
+
+  .signature-grid {
+    break-before: avoid;
+    page-break-before: avoid;
+    gap: 10px;
+  }
+
+  footer { margin-top: 10px; }
+}
+
+@media screen {
+  .print-page-branding { display: none; }
 }
